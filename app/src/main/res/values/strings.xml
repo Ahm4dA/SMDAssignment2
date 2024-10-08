@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">To-Do List</string>
+    <string name="add_task">Add New Task</string>
+    <string name="save">Save</string>
+    <string name="task_name_hint">Task Name</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
