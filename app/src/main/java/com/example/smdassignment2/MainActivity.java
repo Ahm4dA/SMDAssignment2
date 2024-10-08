@@ -21,20 +21,18 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements TaskListFragment.TaskListFragmentListener {
 
     private TaskListFragment taskListFragment;
-    private ArrayList<String> taskNames;      // Store task names
-    private ArrayList<String> taskDescriptions; // Store task descriptions
-    private boolean isTwoPane;  // To check if we are in landscape mode
+    private ArrayList<String> taskNames;
+    private ArrayList<String> taskDescriptions;
+    private boolean isTwoPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize lists
         taskNames = new ArrayList<>();
         taskDescriptions = new ArrayList<>();
 
-        // Restore saved state if available
         if (savedInstanceState != null) {
             taskNames = savedInstanceState.getStringArrayList("taskNames");
             taskDescriptions = savedInstanceState.getStringArrayList("taskDescriptions");
@@ -45,11 +43,10 @@ public class MainActivity extends AppCompatActivity implements TaskListFragment.
         taskListFragment = new TaskListFragment();
         taskListFragment.setTaskListFragmentListener(this);
 
-        // Pass the lists to the fragment
-        taskListFragment.setTaskNames(taskNames); // Use the setter to pass task names
-        taskListFragment.setTaskDescriptions(taskDescriptions); // Use the setter to pass task descriptions
 
-        // In portrait mode, show only the task list fragment
+        taskListFragment.setTaskNames(taskNames);
+        taskListFragment.setTaskDescriptions(taskDescriptions);
+
         if (!isTwoPane) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -75,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements TaskListFragment.
         outState.putStringArrayList("taskDescriptions", taskDescriptions);
     }
 
-    // Handle task selection from TaskListFragment
+
     @Override
     public void onTaskSelected(String taskName, String taskDescription) {
         TaskDetailsFragment taskDetailsFragment = TaskDetailsFragment.newInstance(taskName, taskDescription);
@@ -87,17 +84,16 @@ public class MainActivity extends AppCompatActivity implements TaskListFragment.
         } else {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragmentContainer, taskDetailsFragment)
-                    .addToBackStack(null)  // Add to back stack for navigation
+                    .addToBackStack(null)
                     .commit();
         }
     }
 
-    // Add task to the list from TaskInputFragment
+
     public void addTask(String taskName, String taskDescription) {
-        // Check if the task already exists before adding it to avoid duplicates
         if (!taskNames.contains(taskName)) {
             if (taskListFragment != null) {
-                taskListFragment.addTask(taskName, taskDescription); // Only add to TaskListFragment
+                taskListFragment.addTask(taskName, taskDescription);
             }
         }
     }

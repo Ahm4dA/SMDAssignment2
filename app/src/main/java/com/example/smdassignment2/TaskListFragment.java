@@ -18,8 +18,8 @@ import java.util.ArrayList;
 
 public class TaskListFragment extends Fragment {
 
-    private ArrayList<String> taskNames = new ArrayList<>(); // Initialize task names
-    private ArrayList<String> taskDescriptions = new ArrayList<>(); // Initialize task descriptions
+    private ArrayList<String> taskNames = new ArrayList<>();
+    private ArrayList<String> taskDescriptions = new ArrayList<>();
     private ArrayAdapter<String> taskAdapter;
     private ListView taskListView;
 
@@ -39,17 +39,15 @@ public class TaskListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_task_list, container, false);
         taskListView = view.findViewById(R.id.taskList);
 
-        // Initialize the adapter
         taskAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, taskNames);
         taskListView.setAdapter(taskAdapter);
 
-        // Handle click events on the task list
         taskListView.setOnItemClickListener((parent, v, position, id) -> {
             String taskName = taskNames.get(position);
             String taskDescription = taskDescriptions.get(position);
 
             if (listener != null) {
-                listener.onTaskSelected(taskName, taskDescription);  // Notify MainActivity of task selection
+                listener.onTaskSelected(taskName, taskDescription);
             }
         });
 
@@ -60,13 +58,13 @@ public class TaskListFragment extends Fragment {
     public void onResume() {
         super.onResume();
         // Update the UI if needed
-        taskAdapter.notifyDataSetChanged();  // Notify adapter to refresh the list
+        taskAdapter.notifyDataSetChanged();
     }
 
     public void setTaskNames(ArrayList<String> taskNames) {
         this.taskNames = taskNames;
         if (taskAdapter != null) {
-            taskAdapter.notifyDataSetChanged(); // Notify adapter of data change if already initialized
+            taskAdapter.notifyDataSetChanged();
         }
     }
 
@@ -78,7 +76,7 @@ public class TaskListFragment extends Fragment {
         taskNames.add(taskName);
         taskDescriptions.add(taskDescription);
         if (taskAdapter != null) {
-            taskAdapter.notifyDataSetChanged(); // Notify adapter of data change
+            taskAdapter.notifyDataSetChanged();
         }
     }
 }

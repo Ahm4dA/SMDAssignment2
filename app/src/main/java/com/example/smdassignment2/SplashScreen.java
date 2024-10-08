@@ -25,22 +25,18 @@ public class SplashScreen extends AppCompatActivity {
 
         ImageView logo = findViewById(R.id.appLogo);
 
-        // Create the translate animation
         ObjectAnimator translateAnim = ObjectAnimator.ofFloat(logo, "translationY", -1000f, 0f);
         translateAnim.setDuration(3000);
 
-        // Create the scale animations
         ObjectAnimator scaleXAnim = ObjectAnimator.ofFloat(logo, "scaleX", 0.8f, 1.4f);
         ObjectAnimator scaleYAnim = ObjectAnimator.ofFloat(logo, "scaleY", 0.8f, 1.4f);
         scaleXAnim.setDuration(3000);
         scaleYAnim.setDuration(3000);
 
-        // Combine the animations using AnimatorSet
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(translateAnim, scaleXAnim, scaleYAnim);
         animatorSet.start();
 
-        // Wait for the animation to finish and navigate to MainActivity
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(SplashScreen.this, MainActivity.class);
             startActivity(intent);

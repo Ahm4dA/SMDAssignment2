@@ -30,17 +30,14 @@ public class TaskInputFragment extends DialogFragment {
         taskDescriptionInput = view.findViewById(R.id.taskDescriptionInput);
         Button saveButton = view.findViewById(R.id.saveButton);
 
-        // Handle Save button click
         saveButton.setOnClickListener(view1 -> {
             String taskName = taskNameInput.getText().toString();
             String taskDescription = taskDescriptionInput.getText().toString();
 
-            // Call MainActivity's addTask method to add the task with name and description
             if (getActivity() instanceof MainActivity) {
                 ((MainActivity) getActivity()).addTask(taskName, taskDescription);
             }
 
-            // Close the dialog
             dismiss();
         });
 
@@ -51,11 +48,10 @@ public class TaskInputFragment extends DialogFragment {
     public void onResume() {
         super.onResume();
 
-        // Set fragment width to 90% of the screen width
         Window window = getDialog().getWindow();
         if (window != null) {
             WindowManager.LayoutParams params = window.getAttributes();
-            params.width = WindowManager.LayoutParams.MATCH_PARENT;  // You can set WRAP_CONTENT if you want flexible height
+            params.width = WindowManager.LayoutParams.MATCH_PARENT;
             window.setAttributes(params);
         }
     }
